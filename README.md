@@ -3,6 +3,8 @@
 sarahinit is an AI agent skill initializer.
 It prepares agent instruction/config files in your project so your AI assistants work with the same project rules.
 
+It is designed as a professional autonomous skill pack, not a manual questionnaire workflow.
+
 ## What This Project Is
 
 - A CLI tool to initialize and update AI agent configuration files.
@@ -63,6 +65,13 @@ Update mode is also non-interactive and refreshes managed sections using the cur
 3. In update mode, refreshes existing managed sections using the same auto profile.
 4. Generates or updates native config files for each selected agent.
 5. Preserves manual content outside managed context blocks.
+
+## Professional Skill Behavior
+
+- Uses a shared contract file (`sarah-skill.md`) that all agent configs must follow.
+- Encourages autonomous execution with minimal interruption.
+- Updates task artifacts like `todo-list.md` and `project-notes.md` for multi-step work.
+- Promotes token-efficient, concise, and outcome-focused communication.
 
 ## Why Use It
 

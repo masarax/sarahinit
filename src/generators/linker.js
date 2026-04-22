@@ -9,11 +9,11 @@ export async function generateLinkedFiles(context, cwd) {
     let content = '';
 
     if (fileName === 'claude-md-preferences.md') {
-      content = '# Personal Coding Preferences\n\n- Indentation: 2 spaces\n- Quotes: single\n- Semicolons: yes\n';
+      content = '# Personal Coding Preferences\n\n- Indentation: 2 spaces\n- Quotes: single\n- Semicolons: yes\n- Response style: concise and action-oriented\n';
     } else if (fileName === 'project-notes.md') {
-      content = '# Project Notes\n\n- Architecture decisions go here.\n- Add domain knowledge as needed.\n';
+      content = '# Project Notes\n\n## Architecture\n- Record architecture decisions and rationale.\n\n## Domain Rules\n- Track business constraints and non-negotiable rules.\n\n## Current Focus\n- Keep current milestone and risks updated.\n';
     } else if (fileName === 'todo-list.md') {
-      content = '# TODO List\n\n- [ ] Task 1\n- [ ] Task 2\n';
+      content = '# TODO List\n\n## In Progress\n- [ ] Add current active task\n\n## Next\n- [ ] Add next highest-impact task\n\n## Done\n- [ ] Move completed tasks here with date\n';
     } else if (fileName === 'mixed-with-code.md') {
       content = '# Mixed Notes\n\nCode snippets and documentation mixed.\n';
     }
@@ -23,6 +23,11 @@ export async function generateLinkedFiles(context, cwd) {
     }
 
     const filePath = path.join(cwd, fileName);
+    if (await fs.pathExists(filePath)) {
+      logger.info(`Kept existing ${fileName}`);
+      continue;
+    }
+
     await fs.writeFile(filePath, content, 'utf-8');
     logger.success(`Generated ${fileName}`);
   }

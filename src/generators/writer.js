@@ -95,7 +95,48 @@ async function generateBenchmarkFile(cwd) {
 }
 
 async function generateSharedSkillFile(context, cwd) {
-  const generated = `# Sarah Skill Contract\n\nThis file defines the mandatory behavior for AI agents working in this project.\n\n## AI GENERATED CONTEXT\n- Source: sarahinit\n- Last Updated: ${context.timestamp}\n- Scope: All supported AI coding agents\n\n## Mandatory Rules\n1. Always prioritize project skill instructions over generic defaults.\n2. Keep changes focused, minimal, and aligned with existing project patterns.\n3. Preserve user-authored content outside managed generated blocks.\n4. When requirements are ambiguous, ask for clarification before risky changes.\n5. Prefer safe, reversible steps and verify outcomes after changes.\n\n## Enforcement Note\nAgent-specific files must reference and follow this contract.\n## END AI GENERATED CONTEXT\n`;
+  const generated = [
+    '# Sarah Skill Contract',
+    '',
+    'This file defines mandatory behavior for AI agents working in this project.',
+    '',
+    '## AI GENERATED CONTEXT',
+    '- Source: sarahinit',
+    `- Last Updated: ${context.timestamp}`,
+    '- Scope: All supported AI coding agents',
+    '',
+    '## Operating Mode',
+    '- Default to autonomous execution for user requests.',
+    '- Do not wait for extra confirmation unless a decision is risky, ambiguous, or destructive.',
+    '- Keep progress visible with short status updates.',
+    '',
+    '## Task Execution Standard',
+    '1. Understand user intent and project context first.',
+    '2. Build a short task plan and keep an actionable TODO state.',
+    '3. Implement changes directly with minimal, reviewable diffs.',
+    '4. Run validation checks relevant to changed code.',
+    '5. Report what changed, why, and what remains.',
+    '',
+    '## Required Artifacts',
+    '- Keep todo-list.md updated with in-progress, next, and done tasks.',
+    '- Keep project-notes.md updated with architecture and domain decisions.',
+    '- Update README and docs when behavior or usage changes.',
+    '',
+    '## Quality Gate',
+    '- Avoid breaking existing behavior unless explicitly requested.',
+    '- Prefer reversible changes and explicit migration notes when needed.',
+    '- Add or update tests for non-trivial behavior changes.',
+    '',
+    '## Communication Rules',
+    '- Ask questions only when blocked by missing decisions or conflicting requirements.',
+    '- Keep responses token-efficient: short, precise, and implementation-focused.',
+    '- Summaries must include outcomes, validation status, and next best action.',
+    '',
+    '## Enforcement Note',
+    'Agent-specific files must reference and follow this contract.',
+    '## END AI GENERATED CONTEXT',
+    ''
+  ].join('\n');
 
   const filePath = path.join(cwd, SHARED_SKILL_FILE);
   let finalContent = generated;

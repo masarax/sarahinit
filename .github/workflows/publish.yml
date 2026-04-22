@@ -78,21 +78,31 @@ jobs:
           fi
 
       - name: Publish with token
-        id: publish_token
         if: steps.version_check.outputs.should_publish == 'true' && steps.auth_source.outputs.mode != 'oidc'
-        continue-on-error: true
-        run: pnpm publish --access public --no-git-checks
+        run: |
+          if pnpm publish --access public --no-git-checks; then
+            echo "Published with npm token."
+          else
+            echo "Token is valid for login but lacks publish permission for this package."
+            echo "Set NPM_PUBLISH_TOKEN (preferred) or NPM_TOKEN with publish-capable npm automation/granular token."
+            exit 1
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ steps.auth_source.outputs.token }}
 
       - name: Publish with trusted publishing fallback
-        if: steps.version_check.outputs.should_publish == 'true' && (steps.auth_source.outputs.mode == 'oidc' || steps.publish_token.outcome == 'failure')
+        if: steps.version_check.outputs.should_publish == 'true' && steps.auth_source.outputs.mode == 'oidc'
         run: |
           unset NODE_AUTH_TOKEN
           if [ -n "$NPM_CONFIG_USERCONFIG" ] && [ -f "$NPM_CONFIG_USERCONFIG" ]; then
             rm -f "$NPM_CONFIG_USERCONFIG"
           fi
-          pnpm publish --access public --no-git-checks --provenance
+          if pnpm publish --access public --no-git-checks --provenance; then
+            echo "Published via trusted publishing."
+          else
+            echo "Trusted publishing failed. Configure npm trusted publisher for this GitHub repo or set a publish-capable token secret."
+            exit 1
+          fi
 
       - name: Skip publish
         if: steps.version_check.outputs.should_publish == 'false'

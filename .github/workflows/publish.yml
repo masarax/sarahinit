@@ -46,8 +46,19 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Detect auth mode
+        id: auth_mode
+        run: |
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "has_token=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_token=false" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Validate npm publish access with token
-        if: ${{ secrets.NPM_TOKEN != '' }}
+        if: steps.auth_mode.outputs.has_token == 'true'
         run: |
           npm whoami
         env:

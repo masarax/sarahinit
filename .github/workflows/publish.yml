@@ -77,22 +77,22 @@ jobs:
             echo "should_publish=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Publish with pnpm
-        if: steps.version_check.outputs.should_publish == 'true'
-        run: |
-          if [ -n "$NODE_AUTH_TOKEN" ]; then
-            if pnpm publish --access public --no-git-checks; then
-              echo "Published with npm token."
-            else
-              echo "Token publish failed. Trying trusted publishing fallback."
-              unset NODE_AUTH_TOKEN
-              pnpm publish --access public --no-git-checks --provenance
-            fi
-          else
-            pnpm publish --access public --no-git-checks --provenance
-          fi
+      - name: Publish with token
+        id: publish_token
+        if: steps.version_check.outputs.should_publish == 'true' && steps.auth_source.outputs.mode != 'oidc'
+        continue-on-error: true
+        run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ steps.auth_source.outputs.token }}
+
+      - name: Publish with trusted publishing fallback
+        if: steps.version_check.outputs.should_publish == 'true' && (steps.auth_source.outputs.mode == 'oidc' || steps.publish_token.outcome == 'failure')
+        run: |
+          unset NODE_AUTH_TOKEN
+          if [ -n "$NPM_CONFIG_USERCONFIG" ] && [ -f "$NPM_CONFIG_USERCONFIG" ]; then
+            rm -f "$NPM_CONFIG_USERCONFIG"
+          fi
+          pnpm publish --access public --no-git-checks --provenance
 
       - name: Skip publish
         if: steps.version_check.outputs.should_publish == 'false'

@@ -1,0 +1,22 @@
+# .windsurfrules - Project Context for Windsurf
+<!-- This file is auto-managed. -->
+
+## AI GENERATED CONTEXT
+{{> base-context}}
+## END AI GENERATED CONTEXT
+
+## Additional Windsurf-Specific Guidelines
+- Prefer incremental changes with clear intent and predictable output.
+- Avoid broad rewrites unless explicitly requested by the user.
+- Preserve linting, type-safety, and formatting standards.
+- Keep generated guidance action-oriented and implementation-ready.
+- For bug fixes, explain root cause before presenting the patch.
+- Avoid hidden coupling by documenting changed assumptions.
+- Call out follow-up checks when runtime verification is incomplete.
+
+{{#if multiFile.enableMultiFile}}
+## Linked Context Files
+{{#each multiFile.linkedFiles}}
+- [{{this}}](./{{this}})
+{{/each}}
+{{/if}}

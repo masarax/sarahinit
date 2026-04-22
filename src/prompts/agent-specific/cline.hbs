@@ -1,0 +1,22 @@
+# .clinerules - Project Context for Cline
+<!-- This file is auto-managed. -->
+
+## AI GENERATED CONTEXT
+{{> base-context}}
+## END AI GENERATED CONTEXT
+
+## Additional Cline-Specific Guidelines
+- Explain tradeoffs briefly when proposing structural changes.
+- Keep generated patches scoped, reviewable, and logically grouped.
+- Follow repository conventions before introducing new patterns.
+- Prefer explicit migration notes for breaking behavior changes.
+- Validate that managed sections can be updated idempotently.
+- Preserve manual notes outside auto-generated markers.
+- Recommend targeted tests for risky code paths.
+
+{{#if multiFile.enableMultiFile}}
+## Linked Context Files
+{{#each multiFile.linkedFiles}}
+- [{{this}}](./{{this}})
+{{/each}}
+{{/if}}

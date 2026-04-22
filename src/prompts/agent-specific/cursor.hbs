@@ -1,0 +1,22 @@
+# .cursorrules - Project Context for Cursor
+<!-- This file is auto-managed. -->
+
+## AI GENERATED CONTEXT
+{{> base-context}}
+## END AI GENERATED CONTEXT
+
+## Additional Cursor-Specific Guidelines
+- Keep edits minimal and avoid unnecessary formatting churn.
+- Prefer deterministic code generation over speculative rewrites.
+- Keep naming consistent with existing project conventions.
+- Avoid introducing dependencies unless there is clear, measurable value.
+- When changing behavior, include a short rationale and impact summary.
+- Prioritize type safety and explicit interfaces for shared modules.
+- Ask clarifying questions only when requirements are underspecified.
+
+{{#if multiFile.enableMultiFile}}
+## Linked Context Files
+{{#each multiFile.linkedFiles}}
+- [{{this}}](./{{this}})
+{{/each}}
+{{/if}}

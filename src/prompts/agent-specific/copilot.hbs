@@ -1,0 +1,22 @@
+# copilot-instructions.md - Project Context for GitHub Copilot
+<!-- This file is auto-managed by sarahinit. -->
+
+## AI GENERATED CONTEXT
+{{> base-context}}
+## END AI GENERATED CONTEXT
+
+## Additional Copilot-Specific Guidelines
+- Prioritize safe, concise, and correct code suggestions.
+- Preserve existing style and public APIs unless explicitly requested otherwise.
+- Keep patches narrowly scoped to the user request.
+- Include tests when introducing non-trivial behavior changes.
+- Flag assumptions that might alter runtime behavior.
+- Prefer readable, maintainable implementations over clever one-liners.
+- Mention unresolved validation gaps if execution is not possible.
+
+{{#if multiFile.enableMultiFile}}
+## Linked Context Files
+{{#each multiFile.linkedFiles}}
+- [{{this}}](./{{this}})
+{{/each}}
+{{/if}}

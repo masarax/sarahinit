@@ -1,0 +1,22 @@
+# GEMINI.md - Project Context for Gemini CLI
+<!-- This file is auto-managed. -->
+
+## AI GENERATED CONTEXT
+{{> base-context}}
+## END AI GENERATED CONTEXT
+
+## Additional Gemini-Specific Guidelines
+- Keep instructions concrete, action-oriented, and traceable.
+- Preserve user-authored sections outside managed blocks.
+- Prefer stable patterns over experimental syntax.
+- Favor explicit input validation before file writes.
+- Keep update flows idempotent for repeated runs.
+- Surface operational constraints before risky commands.
+- Include a concise summary of generated artifacts.
+
+{{#if multiFile.enableMultiFile}}
+## Linked Context Files
+{{#each multiFile.linkedFiles}}
+- [{{this}}](./{{this}})
+{{/each}}
+{{/if}}

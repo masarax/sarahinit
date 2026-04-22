@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 
 import { parseArgs } from 'node:util';
-import { main } from '../src/index.js';
+import { installGlobalSkill } from '../src/skill-installer.js';
 
 const { values } = parseArgs({
   options: {
-    update: { type: 'boolean', short: 'u' }
+    update: { type: 'boolean', short: 'u' },
+    verbose: { type: 'boolean', short: 'v' }
   }
 });
 
-main({ updateMode: values.update }).catch((error) => {
-  console.error('Fatal error:', error.message);
+installGlobalSkill({
+  force: Boolean(values.update),
+  silent: !values.verbose
+}).catch((error) => {
+  if (values.verbose) {
+    console.error('sarahinit failed:', error.message);
+  }
   process.exit(1);
 });

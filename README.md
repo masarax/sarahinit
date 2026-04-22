@@ -1,80 +1,49 @@
 # sarahinit
 
-sarahinit is an AI agent skill initializer.
-It prepares agent instruction/config files in your project so your AI assistants work with the same project rules.
+sarahinit is a global AI skill installer.
 
-It is designed as a professional autonomous skill pack, not a manual questionnaire workflow.
+It installs a professional autonomous skill contract so AI agents can follow the same execution style across any workspace.
 
-## What This Project Is
+## What It Does
 
-- A CLI tool to initialize and update AI agent configuration files.
-- A smart detector that finds existing agent files in your workspace.
-- A generator that writes structured context for each selected agent.
+- Installs a global instruction file: sarahinit.instructions.md
+- Enables autonomous, professional task execution behavior in AI chats
+- Focuses on low-token, high-quality implementation style
+- Supports refresh updates through the same package
 
-## Supported Agents
+## Usage
 
-- Claude Code
-- Cursor
-- GitHub Copilot
-- Windsurf
-- Cline
-- Codex
-- Gemini CLI
-- Continue
-- Zed
-
-## Installation
-
-### Run directly
+Install or refresh global skill silently:
 
 ```bash
 npx sarahinit
 ```
 
-### Local development install
-
-```bash
-npm install
-```
-
-## How To Use
-
-### First time setup
-
-```bash
-npx sarahinit
-```
-
-Default setup is non-interactive:
-
-- If agent files are detected, it updates those agent configs automatically.
-- If none are detected, it bootstraps all supported agent config files with a default skill profile.
-
-### Update existing generated sections
+Force refresh the installed skill file:
 
 ```bash
 npx sarahinit --update
 ```
 
-Update mode is also non-interactive and refreshes managed sections using the current auto profile.
+## Package Update
 
-## How The Agent Works
+```bash
+pnpm up sarahinit
+```
 
-1. Scans workspace files to detect which AI agent configs already exist.
-2. By default, applies a profile automatically without blocking prompts.
-3. In update mode, refreshes existing managed sections using the same auto profile.
-4. Generates or updates native config files for each selected agent.
-5. Preserves manual content outside managed context blocks.
+Then refresh:
 
-## Professional Skill Behavior
+```bash
+npx sarahinit --update
+```
 
-- Uses a shared contract file (`sarah-skill.md`) that all agent configs must follow.
-- Encourages autonomous execution with minimal interruption.
-- Updates task artifacts like `todo-list.md` and `project-notes.md` for multi-step work.
-- Promotes token-efficient, concise, and outcome-focused communication.
+## Skill Behavior
 
-## Why Use It
+The installed global skill contract enforces:
 
-- Keep all AI coding agents aligned with one project standard.
-- Avoid repeating the same setup instructions in every tool.
-- Make updates fast with one command.
+- Autonomous execution for normal safe tasks
+- Todo planning for multi-step work
+- Minimal and reviewable code changes
+- Validation/testing after meaningful edits
+- Concise and professional communication
+- Questions only when requirements are ambiguous or risky

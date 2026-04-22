@@ -1,49 +1,64 @@
 # sarahinit
 
-Universal AI agent configuration initializer for modern coding assistants.
+sarahinit is an AI agent skill initializer.
+It prepares agent instruction/config files in your project so your AI assistants work with the same project rules.
 
-## What It Does
+## What This Project Is
 
-- Detects which AI coding agents are already in your project.
-- Runs an interactive setup wizard for project standards.
-- Generates or updates native config files for Claude, Cursor, Copilot, Windsurf, Cline, Codex, Gemini, Continue, and Zed.
-- Preserves user-authored content outside managed blocks.
-- Optionally creates linked context files and a benchmark library.
+- A CLI tool to initialize and update AI agent configuration files.
+- A smart detector that finds existing agent files in your workspace.
+- A generator that writes structured context for each selected agent.
 
-## Requirements
+## Supported Agents
 
-- Node.js 18 or newer
+- Claude Code
+- Cursor
+- GitHub Copilot
+- Windsurf
+- Cline
+- Codex
+- Gemini CLI
+- Continue
+- Zed
 
-## Install Dependencies
+## Installation
 
-```bash
-npm install
-```
-
-## Usage
+### Run directly
 
 ```bash
 npx sarahinit
 ```
 
-Update existing managed sections:
+### Local development install
+
+```bash
+npm install
+```
+
+## How To Use
+
+### First time setup
+
+```bash
+npx sarahinit
+```
+
+### Update existing generated sections
 
 ```bash
 npx sarahinit --update
 ```
 
-The wizard auto-detects known agent configuration files in the current workspace and uses those agents automatically. If no known files exist, it asks which agents to configure.
+## How The Agent Works
 
-## Development
+1. Scans workspace files to detect which AI agent configs already exist.
+2. Asks interactive questions about stack, design style, and workflow.
+3. Generates or updates native config files for each selected agent.
+4. Preserves manual content outside managed context blocks.
+5. Optionally generates linked context files and benchmark notes.
 
-```bash
-npm install
-node bin/cli.js
-```
+## Why Use It
 
-## Local Validation Scenarios
-
-1. Clean folder: run the CLI and choose multiple agents.
-2. Existing config: create a config file with manual notes, rerun with update mode, confirm only managed block changes.
-3. Multi-file mode: enable linked files and verify auxiliary files are generated.
-4. Benchmarks mode: opt in and verify benchmarks.md is generated.
+- Keep all AI coding agents aligned with one project standard.
+- Avoid repeating the same setup instructions in every tool.
+- Make updates fast with one command.

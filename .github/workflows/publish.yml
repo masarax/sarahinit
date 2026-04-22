@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -37,10 +38,18 @@ jobs:
 
       - name: Validate token
         run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "NPM_TOKEN secret is missing in GitHub Actions secrets."
-            exit 1
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM token detected."
+          else
+            echo "NPM_TOKEN not found. Workflow will try trusted publishing path."
           fi
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Validate npm publish access with token
+        if: ${{ secrets.NPM_TOKEN != '' }}
+        run: |
+          npm whoami
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -60,7 +69,12 @@ jobs:
 
       - name: Publish with pnpm
         if: steps.version_check.outputs.should_publish == 'true'
-        run: pnpm publish --access public --no-git-checks
+        run: |
+          if [ -n "$NODE_AUTH_TOKEN" ]; then
+            pnpm publish --access public --no-git-checks
+          else
+            pnpm publish --access public --no-git-checks --provenance
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

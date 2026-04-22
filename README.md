@@ -43,19 +43,26 @@ npm install
 npx sarahinit
 ```
 
+Default setup is non-interactive:
+
+- If agent files are detected, it updates those agent configs automatically.
+- If none are detected, it bootstraps all supported agent config files with a default skill profile.
+
 ### Update existing generated sections
 
 ```bash
 npx sarahinit --update
 ```
 
+Update mode is interactive and lets you customize stack, design, and workflow preferences.
+
 ## How The Agent Works
 
 1. Scans workspace files to detect which AI agent configs already exist.
-2. Asks interactive questions about stack, design style, and workflow.
-3. Generates or updates native config files for each selected agent.
-4. Preserves manual content outside managed context blocks.
-5. Optionally generates linked context files and benchmark notes.
+2. By default, applies a profile automatically without blocking prompts.
+3. In update mode, asks interactive questions for custom profile settings.
+4. Generates or updates native config files for each selected agent.
+5. Preserves manual content outside managed context blocks.
 
 ## Why Use It
 

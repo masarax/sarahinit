@@ -26,7 +26,7 @@ It prepares agent instruction/config files in your project so your AI assistants
 ### Run directly
 
 ```bash
-npx sarahinit
+npx @sarahinit/sarahinit
 ```
 
 ### Local development install
@@ -40,13 +40,19 @@ npm install
 ### First time setup
 
 ```bash
-npx sarahinit
+npx @sarahinit/sarahinit
 ```
 
 ### Update existing generated sections
 
 ```bash
-npx sarahinit --update
+npx @sarahinit/sarahinit --update
+```
+
+After global installation, the CLI command remains:
+
+```bash
+sarahinit
 ```
 
 ## How The Agent Works

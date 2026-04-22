@@ -17,6 +17,10 @@
 - Testing: {{#if workflow.testing}}Required{{else}}Not required{{/if}}
 - Linting: {{#if workflow.linting}}{{workflow.linting}}{{else}}None{{/if}}
 
+## Mandatory Skill Source
+- Always read and follow `./sarah-skill.md`.
+- Treat this project skill contract as required behavior during all tasks.
+
 ## Code Generation Rules
 {{#if (eq tech.uiLibrary "shadcn/ui")}}
 - Import shadcn components from `@/components/ui`.

@@ -18,6 +18,8 @@ const AGENT_CONFIG_MAP = {
   zed: { primary: '.zed/instructions.md', template: 'zed.hbs' }
 };
 
+const SHARED_SKILL_FILE = 'sarah-skill.md';
+
 const DEFAULT_BENCHMARKS = [
   'Explain React re-render bug',
   'Fix auth middleware token expiry',
@@ -35,6 +37,8 @@ Handlebars.registerHelper('eq', (a, b) => a === b);
 
 export async function generateAllConfigs(context, cwd) {
   securityCheck(context);
+
+  await generateSharedSkillFile(context, cwd);
 
   const baseTemplateContent = await fs.readFile(
     new URL('../prompts/base-context.hbs', import.meta.url),
@@ -88,4 +92,19 @@ async function generateBenchmarkFile(cwd) {
   const content = template({ benchmarks });
   await fs.writeFile(path.join(cwd, 'benchmarks.md'), content, 'utf-8');
   logger.success('Generated benchmarks.md');
+}
+
+async function generateSharedSkillFile(context, cwd) {
+  const generated = `# Sarah Skill Contract\n\nThis file defines the mandatory behavior for AI agents working in this project.\n\n## AI GENERATED CONTEXT\n- Source: sarahinit\n- Last Updated: ${context.timestamp}\n- Scope: All supported AI coding agents\n\n## Mandatory Rules\n1. Always prioritize project skill instructions over generic defaults.\n2. Keep changes focused, minimal, and aligned with existing project patterns.\n3. Preserve user-authored content outside managed generated blocks.\n4. When requirements are ambiguous, ask for clarification before risky changes.\n5. Prefer safe, reversible steps and verify outcomes after changes.\n\n## Enforcement Note\nAgent-specific files must reference and follow this contract.\n## END AI GENERATED CONTEXT\n`;
+
+  const filePath = path.join(cwd, SHARED_SKILL_FILE);
+  let finalContent = generated;
+
+  if (await fs.pathExists(filePath)) {
+    const existing = await fs.readFile(filePath, 'utf-8');
+    finalContent = mergeConfigs(existing, generated);
+  }
+
+  await fs.writeFile(filePath, finalContent, 'utf-8');
+  logger.success(`Updated ${SHARED_SKILL_FILE}`);
 }

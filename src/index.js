@@ -1,18 +1,15 @@
 import chalk from 'chalk';
 import { runWizard } from './questions/index.js';
-import { detectAllAgents } from './generators/detector.js';
 import { generateAllConfigs } from './generators/writer.js';
 
 export async function main({ updateMode = false }) {
-  console.log(chalk.bold.cyan('\nUniversal AI Agent Skill Initializer\n'));
+  console.log(chalk.bold.cyan('\nSarahinit AI Skill Pack\n'));
 
   const cwd = process.cwd();
-  const detectedAgents = await detectAllAgents(cwd);
-
-  const userContext = await runWizard(detectedAgents, updateMode, cwd);
+  const userContext = await runWizard([], updateMode, cwd);
 
   await generateAllConfigs(userContext, cwd);
 
-  console.log(chalk.green('\nAll agent configurations updated successfully!'));
-  console.log(chalk.gray('Run "npx sarahinit --update" to modify settings later.'));
+  console.log(chalk.green('\nSarah skill pack applied successfully for all supported AI agents.'));
+  console.log(chalk.gray('Run "npx sarahinit --update" to refresh generated sections.'));
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { parseArgs } from 'node:util';
-import { installGlobalSkill } from '../src/skill-installer.js';
+import { installGlobalSkill } from './skill-installer.js';
 
 const { values } = parseArgs({
   options: {

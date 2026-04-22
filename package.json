@@ -5,17 +5,17 @@
   "packageManager": "pnpm@10.30.1",
   "type": "module",
   "files": [
-    "bin/",
+    "src/entry.js",
     "src/skill-installer.js",
     "skills/",
     "README.md"
   ],
   "bin": {
-    "sarahinit": "./bin/cli.js"
+    "sarahinit": "./src/entry.js"
   },
   "main": "src/skill-installer.js",
   "scripts": {
-    "start": "node bin/cli.js",
+    "start": "node src/entry.js",
     "postinstall": "node src/skill-installer.js"
   },
   "keywords": [

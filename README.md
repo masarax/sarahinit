@@ -54,13 +54,13 @@ Default setup is non-interactive:
 npx sarahinit --update
 ```
 
-Update mode is interactive and lets you customize stack, design, and workflow preferences.
+Update mode is also non-interactive and refreshes managed sections using the current auto profile.
 
 ## How The Agent Works
 
 1. Scans workspace files to detect which AI agent configs already exist.
 2. By default, applies a profile automatically without blocking prompts.
-3. In update mode, asks interactive questions for custom profile settings.
+3. In update mode, refreshes existing managed sections using the same auto profile.
 4. Generates or updates native config files for each selected agent.
 5. Preserves manual content outside managed context blocks.
 

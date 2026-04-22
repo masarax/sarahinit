@@ -1,5 +1,5 @@
 {
-  "name": "@sarahinit/sarahinit",
+  "name": "sarahinit",
   "version": "1.0.0",
   "description": "Universal AI coding agent project initializer with multi-file context linking",
   "packageManager": "pnpm@10.30.1",
